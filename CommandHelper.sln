@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandHelper", "CommandHelper\CommandHelper.csproj", "{CA7DFA6E-6E1E-4CA3-9685-23DC7C38E021}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA7DFA6E-6E1E-4CA3-9685-23DC7C38E021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA7DFA6E-6E1E-4CA3-9685-23DC7C38E021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA7DFA6E-6E1E-4CA3-9685-23DC7C38E021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA7DFA6E-6E1E-4CA3-9685-23DC7C38E021}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBC42A3E-E2E5-4EF7-8A3A-79D5DFD08463}
+	EndGlobalSection
+EndGlobal
