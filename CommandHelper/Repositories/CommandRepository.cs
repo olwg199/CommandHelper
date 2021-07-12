@@ -19,7 +19,7 @@ namespace CommandHelper.Repositories
 
         public Command GetCommandById(int id)
         {
-            return new Command { Id = 0, Description = "Boil eggs", CMDSnippet = "Boil water", Platform = "Kettle&Pen" }
+            return new Command { Id = 0, Description = "Boil eggs", CMDSnippet = "Boil water", Platform = "Kettle&Pen" };
         }
     }
 }

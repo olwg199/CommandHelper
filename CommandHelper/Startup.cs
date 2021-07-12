@@ -1,3 +1,4 @@
+using CommandHelper.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,8 @@ namespace CommandHelper
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<ICommandRepository, CommandRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
