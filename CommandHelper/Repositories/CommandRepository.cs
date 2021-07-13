@@ -1,25 +1,25 @@
 ﻿using CommandHelper.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CommandHelper.Repositories
 {
     public class CommandRepository : ICommandRepository
     {
+        private readonly CommandHelperDbContext _context;
+
+        public CommandRepository(CommandHelperDbContext context)
+        {
+            _context = context;
+        }
         public IEnumerable<Command> GetAllCommands()
         {
-            var commands = new List<Command>
-            {
-                new Command { Id = 0, Description = "Boil eggs", CMDSnippet = "Boil water", Platform = "Kettle&Pen" },
-                new Command { Id = 0, Description = "Cut bread", CMDSnippet = "Get a knife", Platform = "Knife&chopping board" },
-                new Command { Id = 0, Description = "Make cup of tea", CMDSnippet = "Place teabag in cup", Platform = "Kettle&cup" }
-            };
-
-            return commands;
+            return _context.Commands.ToList();
         }
 
         public Command GetCommandById(int id)
         {
-            return new Command { Id = 0, Description = "Boil eggs", CMDSnippet = "Boil water", Platform = "Kettle&Pen" };
+            return _context.Commands.FirstOrDefault(c=>c.Id == id);
         }
     }
 }
