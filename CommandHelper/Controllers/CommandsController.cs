@@ -1,4 +1,6 @@
-﻿using CommandHelper.Models;
+﻿using AutoMapper;
+using CommandHelper.DTOs;
+using CommandHelper.Models;
 using CommandHelper.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,28 +12,32 @@ namespace CommandHelper.Controllers
     public class CommandsController : ControllerBase
     {
         private readonly ICommandRepository _repository;
+        private readonly IMapper _mapper;
 
-        public CommandsController(ICommandRepository repository)
+        public CommandsController(ICommandRepository repository, IMapper mapper)
         {
             this._repository = repository;
+            this._mapper = mapper;
         }
 
         //GET api/commands
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetAllCommands()
+        public ActionResult<IEnumerable<CommandReadDto>> GetAllCommands()
         {
             var commandItems = _repository.GetAllCommands();
 
-            return Ok(commandItems);
+            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commandItems));
         }
 
         //GET api/commands/{id}
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandById(int id)
+        public ActionResult<CommandReadDto> GetCommandById(int id)
         {
             var commandItem = _repository.GetCommandById(id);
 
-            return Ok(commandItem);
+            if (commandItem == null) return NotFound();
+
+            return Ok(_mapper.Map<CommandReadDto>(commandItem));
         }
     }
 }
