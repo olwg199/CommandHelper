@@ -1,6 +1,7 @@
 using CommandHelper.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -18,6 +19,10 @@ namespace CommandHelper
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CommandHelperDbContext>(
+                opt => opt.UseSqlServer(Configuration.GetConnectionString("CommandHelperMsSql"))
+                );
+
             services.AddControllers();
 
             services.AddScoped<ICommandRepository, CommandRepository>();
