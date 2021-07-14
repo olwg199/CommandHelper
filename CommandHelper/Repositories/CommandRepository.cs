@@ -1,4 +1,5 @@
 ﻿using CommandHelper.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,6 +13,11 @@ namespace CommandHelper.Repositories
         {
             _context = context;
         }
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges()> 0);
+        }
+
         public IEnumerable<Command> GetAllCommands()
         {
             return _context.Commands.ToList();
@@ -21,5 +27,13 @@ namespace CommandHelper.Repositories
         {
             return _context.Commands.FirstOrDefault(c=>c.Id == id);
         }
+
+        public void CreateCommand(Command command)
+        {
+            if (command == null) throw new ArgumentNullException(nameof(command));
+
+            _context.Commands.Add(command);
+        }
+
     }
 }
