@@ -39,5 +39,12 @@ namespace CommandHelper.Repositories
         {
             //Nothing
         }
+
+        public void DeleteCommand(Command command)
+        {
+            if (command == null) throw new ArgumentNullException(nameof(command));
+
+            _context.Commands.Remove(command);
+        }
     }
 }

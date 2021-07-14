@@ -89,5 +89,18 @@ namespace CommandHelper.Controllers
 
             return NoContent();
         }
+
+        //DELETE api/commands/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCommand(int id)
+        {
+            var commandModelFromRepository = _repository.GetCommandById(id);
+            if (commandModelFromRepository == null) return NotFound();
+
+            _repository.DeleteCommand(commandModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
