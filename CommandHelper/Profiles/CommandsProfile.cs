@@ -14,6 +14,8 @@ namespace CommandHelper.Profiles
             CreateMap<CommandCreateDto, Command>();
 
             CreateMap<CommandUpdateDto, Command>();
+
+            CreateMap<Command, CommandUpdateDto>();
         }
     }
 }

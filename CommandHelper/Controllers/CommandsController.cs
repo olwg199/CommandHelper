@@ -2,6 +2,7 @@
 using CommandHelper.DTOs;
 using CommandHelper.Models;
 using CommandHelper.Repositories;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -61,6 +62,27 @@ namespace CommandHelper.Controllers
             if (commandModelFromRepository == null) return NotFound();
 
             _mapper.Map(commandUpdateDto, commandModelFromRepository);
+            //For compatibility with other implementations
+            _repository.UpdateCommand(commandModelFromRepository);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/commands/{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialUpdateCommand(int id, JsonPatchDocument<CommandUpdateDto> patchDoc)
+        {
+            var commandModelFromRepository = _repository.GetCommandById(id);
+            if (commandModelFromRepository == null) return NotFound();
+
+            var commandToPatch = _mapper.Map<CommandUpdateDto>(commandModelFromRepository);
+            patchDoc.ApplyTo(commandToPatch, ModelState);
+
+            if (!TryValidateModel(commandToPatch)) return ValidationProblem(ModelState);
+
+            _mapper.Map(commandToPatch, commandModelFromRepository);
+
             //For compatibility with other implementations
             _repository.UpdateCommand(commandModelFromRepository);
             _repository.SaveChanges();
