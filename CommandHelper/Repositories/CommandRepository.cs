@@ -35,5 +35,9 @@ namespace CommandHelper.Repositories
             _context.Commands.Add(command);
         }
 
+        public void UpdateCommand(Command command)
+        {
+            //Nothing
+        }
     }
 }
